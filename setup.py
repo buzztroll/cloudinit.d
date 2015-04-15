@@ -36,7 +36,7 @@ install_requires = [
         "simplejson >= 2.1",
         "apache-libcloud >= 0.17.0",
         "uuid",
-        "PyCrypto >=2.1, <2.4"
+        "PyCrypto == 2.6.1",
         ]
 
 tests_require = install_requires + [
