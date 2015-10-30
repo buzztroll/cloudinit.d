@@ -79,7 +79,7 @@ class IaaSBotoConn(object):
             region = boto.ec2.get_region(iaas, aws_access_key_id=key, aws_secret_access_key=secret)
             if not region:
                 raise ConfigException("The 'iaas' configuration '%s' does not specify a valid boto EC2 region." % iaas)
-            self._con =  boto.connect_ec2(key, secret, region=region, validate_certs=False)
+            self._con =  boto.connect_ec2(key, secret, region=region, validate_certs=False, debug=0)
         else:
             (scheme, iaashost, iaasport, iaaspath) = cloudinitd.parse_url(iaasurl)
             region = RegionInfo(endpoint=iaashost, name=iaas)
@@ -87,9 +87,9 @@ class IaaSBotoConn(object):
             secure = scheme == "https"
 
             if not iaasport:
-                self._con =  boto.connect_ec2(key, secret, region=region, path=iaaspath, is_secure=secure, validate_certs=False)
+                self._con =  boto.connect_ec2(key, secret, region=region, path=iaaspath, is_secure=secure, validate_certs=False, debug=0)
             else:
-                self._con =  boto.connect_ec2(key, secret, port=iaasport, region=region, path=iaaspath, is_secure=secure, validate_certs=False)
+                self._con =  boto.connect_ec2(key, secret, port=iaasport, region=region, path=iaaspath, is_secure=secure, validate_certs=False, debug=0)
             self._con.host = iaashost
 
     def get_all_instances(self, instance_ids=None):
