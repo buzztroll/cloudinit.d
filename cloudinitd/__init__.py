@@ -108,7 +108,7 @@ def make_logger(log_level, runname, logdir=None, servicename=None):
     if servicename:
         logname = logname + "-" + servicename
 
-    logger = logging.getLogger(logname)
+    logger = logging.getLogger()
     logger.setLevel(loglevel)
 
     logfile = None
