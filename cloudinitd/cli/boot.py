@@ -16,7 +16,8 @@ import cloudinitd.cli.output
 from optparse import SUPPRESS_HELP
 import simplejson as json
 
-
+l = logging.getLogger()
+l.setLevel(logging.WARN)
 
 g_verbose = 1
 g_action = ""

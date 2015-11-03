@@ -94,7 +94,6 @@ def get_env_val(key):
 
 
 def make_logger(log_level, runname, logdir=None, servicename=None):
-
     if log_level == "debug":
         loglevel = logging.DEBUG
     elif log_level == "info":
@@ -108,8 +107,9 @@ def make_logger(log_level, runname, logdir=None, servicename=None):
     if servicename:
         logname = logname + "-" + servicename
 
-    logger = logging.getLogger()
+    logger = logging.getLogger(logname)
     logger.setLevel(loglevel)
+
 
     logfile = None
     if logdir == "-":
@@ -137,16 +137,17 @@ def make_logger(log_level, runname, logdir=None, servicename=None):
 
         handler = logging.handlers.RotatingFileHandler(logfile, maxBytes=100*1024*1024, backupCount=5)
 
-    logger.addHandler(handler)
-
     fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     if loglevel == logging.DEBUG:
         fmt = fmt + " || at source line %(filename)s : %(lineno)s"
 
     formatter = logging.Formatter(fmt)
     handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.propagate = 0
 
     global g_open_loggers
+
     g_open_loggers.append(handler)
 
     return (logger, logfile)
