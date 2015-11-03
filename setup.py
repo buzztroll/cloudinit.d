@@ -34,7 +34,7 @@ install_requires = [
         "sqlalchemy >= 0.7.6",
         "fabric == 1.10",
         "simplejson >= 2.1",
-        "apache-libcloud >= 0.17.0",
+        "apache-libcloud == 0.17.0",
         "uuid",
         "pycrypto == 2.6.1",
         ]
