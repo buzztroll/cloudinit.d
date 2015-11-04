@@ -30,7 +30,7 @@ basepath = os.path.dirname(__file__)
 test_plans = plans_list_dirs(os.path.join(basepath, "tests/plans"))
 
 install_requires = [
-        "boto >= 2.6",
+        "boto == 2.38.0",
         "sqlalchemy >= 0.7.6",
         "fabric == 1.10",
         "simplejson >= 2.1",
