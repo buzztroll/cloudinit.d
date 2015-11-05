@@ -342,7 +342,7 @@ class SVCContainer(Pollable):
             # add the ready command no matter what
             cmd = self._get_ssh_ready_cmd()
             cloudinitd.log(self._log, logging.DEBUG, "Adding a ssh poller %s " % (cmd))
-            self._ssh_poller = PopenExecutablePollable(cmd, log=self._log, callback=self._context_cb, timeout=self._s.pgm_timeout, allowed_errors=2)
+            self._ssh_poller = PopenExecutablePollable(cmd, log=self._log, callback=self._context_cb, timeout=self._s.pgm_timeout, allowed_errors=16)
             self._pollables.add_level([self._ssh_poller])
 
             # if already contextualized, dont do it again (could be problematic).  we probably need to make a rule
@@ -858,7 +858,6 @@ class SVCContainer(Pollable):
         return newpath
 
     def _load_dict_from_file(self, path):
-
         #TODO support yaml directly?
         with open(path, "r") as f:
             d = json.load(f)
