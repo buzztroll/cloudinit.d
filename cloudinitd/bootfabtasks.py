@@ -118,7 +118,8 @@ def bootpgm(pgm=None, args=None, conf=None, env_conf=None, output=None, stagedir
         put_pgm = shutil.copy
 
     args = urllib.unquote(args)
-    pgm_to_use('mkdir %s;chmod 777 %s' % (remotedir, remotedir))
+    pgm_to_use('mkdir %s' % remotedir)
+    pgm_to_use('chmod 777 %s' % remotedir)
     pgm_to_use('mkdir -p %s' % stagedir)
     relpgm = os.path.basename(pgm)
     destpgm = "%s/%s" % (stagedir, relpgm)
@@ -141,7 +142,7 @@ def bootpgm(pgm=None, args=None, conf=None, env_conf=None, output=None, stagedir
         os.remove(env_conf)
     destpgm = destpgm + " " + args
 
-    local_cmd = _make_ssh("cd %s;%s" %(stagedir, destpgm), local_exe=local_exe)
+    local_cmd = _make_ssh("(cd %s && %s)" %(stagedir, destpgm), local_exe=local_exe)
     if local_cmd:
         local(local_cmd)
 
