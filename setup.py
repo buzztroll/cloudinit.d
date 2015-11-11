@@ -30,14 +30,13 @@ basepath = os.path.dirname(__file__)
 test_plans = plans_list_dirs(os.path.join(basepath, "tests/plans"))
 
 install_requires = [
-        "boto",
-        "paramiko",
-        "sqlalchemy",
-        "fabric",
-        "simplejson",
+        "boto == 2.6",
+        "sqlalchemy == 0.7.6",
+        "fabric == 1.10",
+        "simplejson == 2.1",
         "apache-libcloud == 0.17.0",
         "uuid",
-        "pycrypto"
+        "PyCrypto >=2.1, <2.4"
         ]
 
 tests_require = install_requires + [
