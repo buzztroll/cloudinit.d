@@ -384,6 +384,10 @@ class SVCContainer(Pollable):
                 fabexec = os.environ['CLOUDINITD_FAB']
         except:
             pass
+        try:
+            fabopts = os.environ['CLOUDINITD_FAB_OPTS']
+        except:
+            fabopts = ""
         fabfile = str(bootfabtasks.__file__).strip()
         cloudinitd.log(self._log, logging.DEBUG, "raw fabfileis: |%s|" % (fabfile))
         if fabfile[-4:] == ".pyc":
@@ -392,7 +396,7 @@ class SVCContainer(Pollable):
         key_str = ""
         if self._s.localkey:
             key_str = "-i %s" % (self._s.localkey)
-        cmd = fabexec + " -f %s -D -u %s %s " % (fabfile, self._s.username, key_str)
+        cmd = fabexec + " %s -f %s -D -u %s %s " % (fabopts, fabfile, self._s.username, key_str)
         cloudinitd.log(self._log, logging.DEBUG, "fab command is: %s" % (cmd))
         return cmd
 
